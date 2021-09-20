@@ -8,17 +8,17 @@ VMM (virtual machine manager / software): VirtualBox
 ### Setting up Linux Mint on a Windows 10 Host. 
 1.	Download the Linux Mint Cinnamon Edition ISO from https://linuxmint.com/download.php
   a.	It is strongly recommended to move this ISO out of the downloads folder and into a more permanent folder. VirtualBox will point to it later, so it is best to avoid moving it around. 
-2.	In VirtualBox, click new to begin creating a new machine.
-  a.	The machine type should be set to Linux, and the version should be set to Ubuntu (64-bit) as this is the closest option to Mint. 
+2.	In VirtualBox, click "new" to begin creating a new machine.
+  a.	The "machine type" should be set to Linux, and the "version" should be set to Ubuntu (64-bit) as this is the closest option to Mint. 
   b.	Allocate at least 8192MB of memory.
   c.	Create a “virtual hard disk” for the VM to store stuff on (click next).
   d.	Use a VDI for the virtual hard disk (click next).
   e.	Select “Dynamically allocated” for storage and allocate 350GB of space.
   i.	I did it this way so I could use the VM for multiple different things without having to worry about running out of space. I have a 2TB SSD where the VM is located. 
-3.	Now that the machine is created, tweak a few settings. 
+3.	Now that the machine is created, click on settings and tweak a few things. 
   a.	Go into “Display” settings and make sure 3D acceleration is turned OFF. There is currently a bug within the newest version of Mint that makes the screen white if 3D acceleration is enabled. More information can be found at https://forums.linuxmint.com/viewtopic.php?t=354405.
-  b.	Under system settings, click on processor and slide it to 4 CPUs. This is in terms of threads, so 2 cores will be allocated to the VM. 
-4.	Navigate to storage under settings. Select the empty disk icon under the IDE controller. On the right-hand side under attributes, click the disk icon and then click “choose a disk file”. Navigate to where the ISO is located (I recommend moving it out of the downloads folder) and select it. 
+  b.	Under "system settings", click on "processor" and slide it to 4 CPUs. This is in terms of threads, so 2 cores will be allocated to the VM. 
+4.	Navigate to "storage" under settings. Select the empty disk icon under the IDE controller. On the right-hand side under attributes, click the disk icon and then click “choose a disk file”. Navigate to where the ISO is located (I recommend moving it out of the downloads folder) and select it. 
 5.	Click start to start the Mint VM.
   a.	Wait for the timer displayed by the OS to reach 0 (or hit enter over “Start Linux Mint”).
   b.	Double click the CD on the desktop of the guest that says “Install Linux Mint”. 
@@ -54,8 +54,9 @@ My host is connected to a router via ethernet. The router has a public IP addres
 The guest connection is very similar, but with the addition of a hypervisor. The guest has a private IP address that is structured differently from the private IP address of the host’s router. The host acts as the router for the guest (thanks to the hypervisor). Therefore, the guest uses the same public IP as the host in the end. Traffic travels from the guest to the host (if it meets the firewall/security rules) and then to the router. 
 
 ## Part 3 - Networking with Style
-I chose to experiment with host only networking. In VirtualBox, select settings, network, attached to, Host-only Adapter.
-The private IP address for my guest was in the 10.0.0.0/24 format while in NAT mode, and switched to 192.168 format when in host-only mode. I was unable to ping the address from my host while using NAT, but it was successful when using host only.
+I chose to experiment with host only networking. 
+In VirtualBox, select "settings", "network", "attached to", and the pick "Host-only Adapter" from the dropdown. There was only one "Name" available, so select VirtualBox Host-Only Ethernet Adapter.
+The private IP address for my guest was in the 10.0.0.0/24 format while using NAT networking, and switched to 192.168.56.0/24 format when in host-only mode. You can ping the private IP of your guest from your host to test if it is in NAT mode or another kind of mode. Pings won't work in NAT mode, but they will in host only (and bridged) mode. 
 ## Useful commands:
 ### Powershell:
 - `ipconfig` - Displays settings for all available networking adapters
