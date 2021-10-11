@@ -4,17 +4,16 @@
 
 # How to Install
 ## Docker
-Run the following commands in the order they are listed. 
-`$ sudo apt-get update`
-(Optional) `$ sudo apt-get upgrade`
-Verify there is no old version of docker on your system.
-`$ sudo apt-get remove docker docker-engine docker.io containerd runc`
-If the previous packages report as being not installed, that is okay.
-Some versions of Linux (e.g. mint) reports that docker-engine cannot be located. 
+1. `$ sudo apt-get update`<br>
+1a. (Optional) `$ sudo apt-get upgrade`<br>
+2. Verify there is no old version of docker on your system. `$ sudo apt-get remove docker docker-engine docker.io containerd runc`<br>
+**Note** If the previous packages report as being not installed, that is okay. Some versions of Linux (e.g. mint) reports that docker-engine cannot be located. This seems to be less okay but I was still able to ignore it and get docker running. <br>
 
-We are going to be installing docker from the repository. 
-To add the repository, first run `$sudo apt-get install apt-transport-https ca-certificates curl gnupg lsb-release`
-This will allow `apt` to use a repository over HTTPS. 
+3. We are going to be installing docker from the repository. To add the repository, first run <br>
+`$sudo apt-get install apt-transport-https ca-certificates curl gnupg lsb-release`<br>
+This will allow `apt` to use a repository over HTTPS. <br><br>
+
+
 `$ sudo systemctl enable docker && sudo systemctl start docker`
 Check the status to make sure the installation worked and everything was enabled correctly. 
 `$ sudo systemctl status docker`
