@@ -21,8 +21,11 @@ This will allow `apt` to use a repository over HTTPS.
 
 # Pulling a Container Image
 ## Docker
+`$ sudo docker pull IMAGE:VERSION` will pull the requested image. If no version is specified, the latest version will be pulled.
+View all images with `$ sudo docker image ls`
 # Running a Container 
 ## Docker
+`$ sudo docker run CONTAINER` will run the specified container. If it cannot be found locally, docker will first try to pull it, then run it. 
 # Logs and Status
 ## Docker
 # Stopping a Container
