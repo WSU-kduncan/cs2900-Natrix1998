@@ -37,8 +37,8 @@ View all images with `$ sudo docker image ls`
 - This means that the container will run in the background and it will not receive input or display output. Typically how you might want to run a webserver or a large data analysis job.
 - Alternatively, running the command with `-it` options will run the container and keep STDIN open along with providing a terminal. 
 - `-i` can be thought of as input/interactive, and `-t` can be thought of as terminal.
-- Sidenote: docker says `-t` "allocates a pseudo-tty" and since tty is an abbreviation for TeleTYpewriter (somehow) it's definitely just an "open a terminal" command.
-- If you use `-t` without `-i` you can see what the container is doing but you can't input any commands via the terminal.
+  - Sidenote: docker says `-t` "allocates a pseudo-tty" and since tty is an abbreviation for TeleTYpewriter (somehow) it's definitely just an "open a terminal" command.
+  - If you use `-t` without `-i` you can see what the container is doing but you can't input any commands via the terminal.
 `$ sudo docker exec CONTAINERNAME COMMAND` will execute the given command in the selected **running** container. This could be useful for configuring settings, weekly maintenance jobs, etc. 
 
 ## LXC
