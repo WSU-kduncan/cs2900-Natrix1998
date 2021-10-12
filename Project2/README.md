@@ -2,7 +2,7 @@
 1. Docker Engine (Not Docker Desktop, and not older versions which were named docker, docker.io, and docker-engine). I will still refer to Docker Engine with all-encompassing "Docker" because they do as well. 
 2. Podman. (Docker in disguise).
 **NOTE** This guide assumes you are running Linux Mint 20.1 Ulyssa for Docker. Linux Mint is somewhat known for being as close to a Windows OS as possible while still being linux, and that definitely shows when it comes to getting container platforms up and running. I recommend you DON'T use Mint, and instead use Ubuntu or even a Mac. I like Mint/I'm used to it and I am reluctant to change, so, here we are.
-- **I am using ubuntu for podman. Mint does not work easily with containers.** 
+- **I am using Ubuntu 20.10 for podman. Mint does not work easily with containers, and 20.10 is recommended heavily by podman to make everything easier.** 
 # How to Install
 ## Docker
 1. `$ sudo apt-get update`.
@@ -18,12 +18,13 @@ This will allow `apt` to use a repository over HTTPS.
   focal stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null`<br><br>
   **IMPORTANT** If using linux mint, make sure you select focal instead of `$(lsb_release -cs)` as Docker's site suggests.<br><br>
 6. Run `$ sudo apt-get update` and then `$ sudo apt-get install docker-ce docker-ce-cli containerd.io` to install the latest versions of Docker Engine and containerd.
-7. Verify the installation by running `$ sudo docker run hello-world`
+7. Verify the installation by running `$ sudo docker run hello-world`<br>
 7a. This will pull the image down and run it, testing both at once. 
 ## Podman
 1. `$ sudo apt-get update`
 2. `$ sudo apt-get install podman`
-3. Much better than Linux Mint already. 
+3. Test by using `$ podman run -dt -p 8080:80/tcp docker.io/library/httpd` to run an httpd server. (Connecting is optional because of potentially annoying port-forwarding and additional linux configurations. If it didn't throw errors during install and run it should be fine.)
+4.  Much better than using docker with mint. 
 # Pulling a Container Image
 ## Docker
 `$ sudo docker pull IMAGE:VERSION` will pull the requested image. If no version is specified, the latest version will be pulled.<br>
