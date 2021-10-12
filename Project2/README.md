@@ -1,9 +1,8 @@
 # Container Technologies
-1. Docker Engine (Not Docker Desktop, and not older versions which were named docker, docker.io, and docker-engine)
+1. Docker Engine (Not Docker Desktop, and not older versions which were named docker, docker.io, and docker-engine). I will still refer to Docker Engine with all-encompassing "Docker" because they do as well. 
 2. Podman
 
 # How to Install
-
 ## Docker
 1. `$ sudo apt-get update`<br>
 1a. (Optional) `$ sudo apt-get upgrade`<br>
@@ -16,7 +15,7 @@ This will allow `apt` to use a repository over HTTPS.
 5. Add the repo for the stable version. `echo \
   "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu \
   focal stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null`<br><br>
-  **IMPORTANT** If using linux mint, make sure you select focal instead of `$(lsb_release -cs)` as Docker's site suggests.<br>
+  **IMPORTANT** If using linux mint, make sure you select focal instead of `$(lsb_release -cs)` as Docker's site suggests.<br><br>
 6. Run `$ sudo apt-get update` and then `$ sudo apt-get install docker-ce docker-ce-cli containerd.io` to install the latest versions of Docker Engine and containerd.
 7. Verify the installation by running `$ sudo docker run hello-world`
 7a. This will pull the image down and run it, testing both at once. 
@@ -33,10 +32,11 @@ View all images with `$ sudo docker image ls`
 # Running a Container 
 
 ## Docker
-`$ sudo docker run CONTAINERNAME` will run the specified container. If it cannot be found locally, docker will first try to pull it, then run it. 
-
-
-
+`$ sudo docker run CONTAINERNAME` will run the specified container. If it cannot be found locally, docker will first try to pull it, then run it.<br>
+Add the `-d` option to the above command and docker will run in "detached" mode. This means that the container will run in the background and it will not receive input or display output. <br>
+Alternatively, running the command `$ sudo docker run -it CONTAINERNAME` will run the container and keep STDIN open along with providing a terminal. `-i` can be thought of as input/interactive, and `-t` can be thought of as terminal.<br>
+- Sidenote: docker says `-t` "allocates a pseudo-tty" and since tty is an abbreviation for TeleTYpewriter (somehow) it's definitely just an "open a terminal" command. If you use `-t` without `-i` you can see what the container is doing but you can't input any commands via the terminal. 
+`$ sudo docker exec CONTAINERNAME COMMAND` will execute the given command in the selected **running** container.
 
 ## Podman
 
