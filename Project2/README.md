@@ -1,6 +1,6 @@
 # Container Technologies
 1. Docker Engine (Not Docker Desktop, and not older versions which were named docker, docker.io, and docker-engine). I will still refer to Docker Engine with all-encompassing "Docker" because they do as well. 
-2. Podman.
+2. Podman. (Docker in disguise).
 **NOTE** This guide assumes you are running Linux Mint 20.1 Ulyssa for Docker. Linux Mint is somewhat known for being as close to a Windows OS as possible while still being linux, and that definitely shows when it comes to getting container platforms up and running. I recommend you DON'T use Mint, and instead use Ubuntu or even a Mac. I like Mint/I'm used to it and I am reluctant to change, so, here we are.
 - **I am using ubuntu for podman. Mint does not work easily with containers.** 
 # How to Install
@@ -43,10 +43,10 @@ Docker automatically initializes containers when you run them. You can specify t
   - If you use `-t` without `-i` you can see what the container is doing but you can't input any commands via the terminal.
 `$ sudo docker exec CONTAINERNAME COMMAND` will execute the given command in the selected **running** container. This could be useful for configuring settings, weekly maintenance jobs, etc. 
 ## Podman
-Podman is also very similar to docker in when it comes to running containers. Simply use `$ sudo podman run CONTAINERNAME` to run a container.
-You can use `$ sudo podman container init CONTAINERNAME` to initialize a container. Initializing a container performs all tasks necessary for starting the container (mounting filesystems, creating an OCI spec, initializing the container network) but does not start the container. Source: https://docs.podman.io/en/latest/markdown/podman-init.1.html
+Podman is also very similar to docker in when it comes to running containers. <br>Simply use `$ sudo podman run CONTAINERNAME` to run a container.
+You can use `$ sudo podman container init CONTAINERNAME` to initialize a container. Initializing a container performs all tasks necessary for starting the container (mounting filesystems, creating an OCI spec, initializing the container network) but does not start the container. <br> Source: https://docs.podman.io/en/latest/markdown/podman-init.1.html <br>
+All of the previously mentioned docker run options will work with podman (if you swap out `docker` for `podman`). 
 # Logs and Status
-
 ## Docker
 1. To check the status of all containers, simply run `$ sudo docker container ls -a`. The status column displays the uptime or time since exit for each container.
 1a. Additionally, running `$ sudo docker container stats CONTAINER` will display the resource usage of the specified container. Things such as CPU usage, mem usage, number of processes, etc. 
@@ -54,11 +54,11 @@ You can use `$ sudo podman container init CONTAINERNAME` to initialize a contain
 To view the logs for a running container, open a separate terminal window and use the `-f` option with the logs command.<br>
 `$ sudo docker logs -f CONTAINERNAME`<br>
 If I typed "echo 'hello'" in an ubuntu container, the logs terminal would immediately show that command being entered and the output it produces. 
-
 ## Podman
-
+1. To check the status of all containers, run `$ sudo podman ps -a`. Note that podman uses **ps** NOT **ls** (although I think ls still works for now 10/12/2021).
+1a. The previously mentioned docker commands work in podman as well. `$ sudo podman container stats CONTAINERNAME` will show a specific containers resource usage. Without a name, the command will display the resource usage for all running containers. Further options like `-a` can be added to include all containers. 
+2. Logs works exactly the same as described above, but with `podman` instead of docker. 
 # Stopping a Container
-
 ## Docker
 First, I suggest getting all container ID's with `$ sudo docker container ls -a`. You'll need to enter these CONTAINER IDs or NAMES when running commands.<br>
 Pause: `$ sudo docker container pause CONTAINERNAME` pauses the processes running inside the container. Locks further input if it's something like Ubuntu.
@@ -66,8 +66,9 @@ Unpause: Same command as before but with `unpause` this time. Resumes the proces
 Start: Starts a stopped container. `$ sudo docker container start -i CONTAINERNAME` <br>
 Don't forget `-i` to start it in an interactive terminal. 
 Stop: `$ sudo docker stop CONTAINERNAME` stops the container "gracefully" by asking it nicely to shut down.<br>
-Kill: `$ sudo docker kill CONTAINER_ID` stops the container "hard".<br>
-The difference can be thought of as clicking "shut down" vs holding the power button on a computer. 
+Kill: `$ sudo docker kill CONTAINERNAME` stops the container "hard".<br>
+The difference can be (kind of) thought of as clicking "shut down" vs holding the power button on a computer. 
 To remove all stopped containers: `$ sudo docker container prune -y`
-
 ## Podman
+Podman is miraculously the same in every regard when it comes to stopping and restarting a container. It has some extra features to be aware of, **do not** try to start a container with `play`. That is a command for pods.<br>
+Otherwise, the above commands listed for `docker` will work when running `podman`. 
