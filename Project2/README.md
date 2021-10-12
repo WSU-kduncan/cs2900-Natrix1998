@@ -1,8 +1,9 @@
 # Container Technologies
 1. Docker Engine (Not Docker Desktop, and not older versions which were named docker, docker.io, and docker-engine). I will still refer to Docker Engine with all-encompassing "Docker" because they do as well. 
-2. LXC Linux Containers
+2. Podman
 
-**NOTE** This guide assumes you are running Linux Mint 20.1 Ulyssa. Linux Mint is somewhat known for being as close to a Windows OS as possible while still being linux, and that definitely shows when it comes to getting container platforms up and running. I recommend you DON'T use Mint, and instead use Ubuntu or even a Mac. I like Mint/I'm used to it and I am reluctant to change, so, here we are. 
+**NOTE** This guide assumes you are running Linux Mint 20.1 Ulyssa for Docker. Linux Mint is somewhat known for being as close to a Windows OS as possible while still being linux, and that definitely shows when it comes to getting container platforms up and running. I recommend you DON'T use Mint, and instead use Ubuntu or even a Mac. I like Mint/I'm used to it and I am reluctant to change, so, here we are.
+- I am using ubuntu for podman. Mint does not work with containers. 
 
 # How to Install
 ## Docker
@@ -21,14 +22,14 @@ This will allow `apt` to use a repository over HTTPS.
 6. Run `$ sudo apt-get update` and then `$ sudo apt-get install docker-ce docker-ce-cli containerd.io` to install the latest versions of Docker Engine and containerd.
 7. Verify the installation by running `$ sudo docker run hello-world`
 7a. This will pull the image down and run it, testing both at once. 
-## LXC
+## Podman
 1. `$ sudo apt-get update`
-2. `$ sudo apt-get install lxc`
+2. `$ sudo apt-get install podman`
 # Pulling a Container Image
 ## Docker
 `$ sudo docker pull IMAGE:VERSION` will pull the requested image. If no version is specified, the latest version will be pulled.
 View all images with `$ sudo docker image ls`
-## LXC
+## Podman
 
 # Running a Container 
 ## Docker
@@ -41,7 +42,7 @@ View all images with `$ sudo docker image ls`
   - If you use `-t` without `-i` you can see what the container is doing but you can't input any commands via the terminal.
 `$ sudo docker exec CONTAINERNAME COMMAND` will execute the given command in the selected **running** container. This could be useful for configuring settings, weekly maintenance jobs, etc. 
 
-## LXC
+## Podman
 
 # Logs and Status
 
@@ -53,7 +54,7 @@ To view the logs for a running container, open a separate terminal window and us
 `$ sudo docker logs -f CONTAINERNAME`<br>
 If I typed "echo 'hello'" in an ubuntu container, the logs terminal would immediately show that command being entered and the output it produces. 
 
-## LXC
+## Podman
 
 # Stopping a Container
 
@@ -68,4 +69,4 @@ Kill: `$ sudo docker kill CONTAINER_ID` stops the container "hard".<br>
 The difference can be thought of as clicking "shut down" vs holding the power button on a computer. 
 To remove all stopped containers: `$ sudo docker container prune -y`
 
-## LXC
+## Podman
