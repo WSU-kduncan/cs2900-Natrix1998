@@ -1,10 +1,8 @@
 # Container Technologies
 1. Docker Engine (Not Docker Desktop, and not older versions which were named docker, docker.io, and docker-engine). I will still refer to Docker Engine with all-encompassing "Docker" because they do as well. 
-2. Podman
-
+2. Podman.
 **NOTE** This guide assumes you are running Linux Mint 20.1 Ulyssa for Docker. Linux Mint is somewhat known for being as close to a Windows OS as possible while still being linux, and that definitely shows when it comes to getting container platforms up and running. I recommend you DON'T use Mint, and instead use Ubuntu or even a Mac. I like Mint/I'm used to it and I am reluctant to change, so, here we are.
-- I am using ubuntu for podman. Mint does not work with containers. 
-
+- **I am using ubuntu for podman. Mint does not work easily with containers.** 
 # How to Install
 ## Docker
 1. `$ sudo apt-get update`.
@@ -25,15 +23,18 @@ This will allow `apt` to use a repository over HTTPS.
 ## Podman
 1. `$ sudo apt-get update`
 2. `$ sudo apt-get install podman`
+3. Much better than Linux Mint already. 
 # Pulling a Container Image
 ## Docker
-`$ sudo docker pull IMAGE:VERSION` will pull the requested image. If no version is specified, the latest version will be pulled.
-View all images with `$ sudo docker image ls`
+`$ sudo docker pull IMAGE:VERSION` will pull the requested image. If no version is specified, the latest version will be pulled.<br>
+View all images with `$ sudo docker image ls -a`
 ## Podman
-
+Podman works similarly to docker, use `$ sudo podman pull IMAGE` to pull a requested image. It can also pull docker archive images with `$ podman pull docker-archive:/tmp/myimage`. <br>
+View all images with `$ sudo podman image ls -a`. This is the same as docker and the output is in a very similar format as well. 
 # Running a Container 
 ## Docker
-`$ sudo docker run CONTAINERNAME` will run the specified container. If it cannot be found locally, docker will first try to pull it, then run it.<br>
+`$ sudo docker run CONTAINERNAME` will run the specified container (and initialize it first, more on that later). If it cannot be found locally, docker will first try to pull it, then run it.<br>
+Docker automatically initializes containers when you run them. You can specify the executable you want to handle the init process, by adding the `--init PATH` flag, but this is somewhat new. "The default init process used is the first docker-init executable found in the system path of the Docker daemon process" Source: https://docs.docker.com/engine/reference/run/ <br>
 - Add the `-d` option to the above command and docker will run in "detached" mode.<br>
 - This means that the container will run in the background and it will not receive input or display output. Typically how you might want to run a webserver or a large data analysis job.
 - Alternatively, running the command with `-it` options will run the container and keep STDIN open along with providing a terminal. 
@@ -41,9 +42,9 @@ View all images with `$ sudo docker image ls`
   - Sidenote: docker says `-t` "allocates a pseudo-tty" and since tty is an abbreviation for TeleTYpewriter (somehow) it's definitely just an "open a terminal" command.
   - If you use `-t` without `-i` you can see what the container is doing but you can't input any commands via the terminal.
 `$ sudo docker exec CONTAINERNAME COMMAND` will execute the given command in the selected **running** container. This could be useful for configuring settings, weekly maintenance jobs, etc. 
-
 ## Podman
-
+Podman is also very similar to docker in when it comes to running containers. Simply use `$ sudo podman run CONTAINERNAME` to run a container.
+You can use `$ sudo podman container init CONTAINERNAME` to initialize a container. Initializing a container performs all tasks necessary for starting the container (mounting filesystems, creating an OCI spec, initializing the container network) but does not start the container. Source: https://docs.podman.io/en/latest/markdown/podman-init.1.html
 # Logs and Status
 
 ## Docker
