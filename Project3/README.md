@@ -22,7 +22,7 @@ Conclusion: Use volumes, don't ever touch bind mounts. I read somewhere that bin
 # Investigate Building Images for the Container Engine
 ## Docker
 1. Docker has image building tools provided. Docker uses a configuration file called "Dockerfile" to build images.
-    * To setup a Dockerfile, you need a minimum of ____________________
+    * To setup a Dockerfile, you need a minimum of the FROM, RUN, and CMD commands usually. These will be discussed later. 
     * The command for building images via the CLI is `$ docker build [OPTIONS] PATH | URL`, which builds an image based on the Dockerfile and the "context". 
         * Context: Refers to a set of files at the specified PATH or URL. 
 An example Dockerfile is as follows.
